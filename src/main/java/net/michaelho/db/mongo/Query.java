@@ -66,6 +66,15 @@ public class Query implements Bson {
         return new Query("$match", matchQuery);
     }
 
+    public static String nestedField (String parent, Object field) {
+        String child = field.toString();
+        if (field instanceof String) {
+            // no need to format it
+            child = (String)field;
+        }
+        return parent + '.' + child;
+    }
+    
     public static Query notExists (String field) {
         return new Query(field, false).exists();
     }
