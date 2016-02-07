@@ -22,8 +22,8 @@ public class Query implements Bson {
     public static final String KEY_MONGO_ID = "_id";
     private final Map<String, Object> mapping;
 
-    public static Query addToSet (String field) {
-        return new Query("$addToSet", field);
+    public static Query addToSet (Query query) {
+        return new Query("$addToSet", query);
     }
 
     public static Query and (Query... queries) {
