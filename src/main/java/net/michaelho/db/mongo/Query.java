@@ -7,6 +7,7 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -74,7 +75,15 @@ public class Query implements Bson {
         }
         return parent + '.' + child;
     }
-    
+
+    public static String nestedField (Object... fieldChain) {
+        List<String> strings = new ArrayList<>(fieldChain.length);
+        for (Object field : fieldChain) {
+            strings.add(field.toString());
+        }
+        return String.join(".", strings);
+    }
+
     public static Query notExists (String field) {
         return new Query(field, false).exists();
     }
